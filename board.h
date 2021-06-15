@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <stdlib.h>     
+#include <time.h>       
 
 using namespace std;
 
@@ -9,6 +11,6 @@ class boardClass{
   public:
     boardClass(int, int);
     void printBoard();
-
-    vector<vector<int> > createBoard();
+    void addAliveCells(int);
+    void createBoard();
 };
