@@ -1,9 +1,9 @@
 #include "board.h"
 
-boardClass::boardClass(int x, int y){
-  xDim = x;
-  yDim = y;
-  theBoard = createBoard();
+boardClass::boardClass(int row, int column){
+  xDim = column;
+  yDim = row;
+  createBoard();
 }
 
 void boardClass::printBoard(){
@@ -15,16 +15,32 @@ void boardClass::printBoard(){
   }
 }
 
-vector<vector<int> > boardClass::createBoard(){
+//xDim = # columns
+void boardClass::createBoard(){
   cout<<"A new board has been created!"<<endl;
-  vector<vector<int> > theBoard;
   vector<int> temp;
-  for(int x = 0; x < xDim; x++){
-    for(int y = 0; y < yDim; y++){
+  for(int row = 0; row < yDim; row++){
+    for(int col = 0; col < xDim; col++){
       temp.push_back(0);
     }
     theBoard.push_back(temp);
     temp.clear();
   }
-  return theBoard;
+}
+
+void boardClass::addAliveCells(int numAlive){
+
+  int numInserted = 0;
+  int x, y;
+
+  while(numInserted<numAlive){
+    //Generates the dimensions randomly
+    x = rand() % (xDim); //column
+    y = rand() % (yDim); //row
+    if(!theBoard[y][x]){
+      numInserted++;
+      theBoard[y][x] = 1;
+    }
+  }
+  cout<<"done"<<endl;
 }
