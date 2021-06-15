@@ -13,4 +13,7 @@ class boardClass{
     void printBoard();
     void addAliveCells(int);
     void createBoard();
+    void update();
+    bool aliveCheck(int, int);
+    bool stillDeadCheck(int, int);
 };
