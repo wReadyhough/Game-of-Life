@@ -12,7 +12,7 @@ int main() {
   int numAlive, row, column;
   row = 5;
   column = 6;
-  int numIterations = 100;
+  int numIterations = 1000;
   for(int i = 0; i < numIterations; i++){
     boardClass myBoard(row,column);
     myBoard.printBoard();
@@ -28,7 +28,7 @@ int main() {
   }
   auto stop = high_resolution_clock::now();
   auto duration = duration_cast<microseconds>(stop - start);
-  cout<<"On average, program took: "<<(duration/numIterations)<<" microseconds"<<endl;
+  cout<<"On average, program took: "<<(duration.count()/numIterations)<<" microseconds"<<endl;
   
 }
 
