@@ -15,8 +15,8 @@ int main() {
     
 
     int numAlive, row, column;
-    row = 5;
-    column = 6;
+    row = 10;
+    column = 10;
     boardClass myBoard(row,column);
     myBoard.printBoard();
     /*cout<<"How many cells do you want alive: ";
