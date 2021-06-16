@@ -5,9 +5,30 @@
 
 using namespace std;
 
-class boardClass{
+class cell{
+  int AD;// Alive or Dead. 1 for alive;
+  int xDim, yDim; //XDim = columns
+  vector<int> neighborRows;
+  vector<int> neighborCols;
+
+  public:
+    cell(int, int);
+    cell();
+    ~cell();
+    int getXDim();
+    int getYDim();
+    int getAD();
+    vector<int> getRows();
+    vector<int> getCols();
+    void flipAD();
+    void calcNeighbors();
+    void displayNeigbors();
+};
+
+
+class boardClass: public cell{
   int xDim, yDim;
-  vector<vector<int>> theBoard;
+  vector<vector<cell>> theBoard;
   public:
     boardClass(int, int);
     void printBoard();
@@ -17,3 +38,4 @@ class boardClass{
     bool aliveCheck(int, int);
     bool stillDeadCheck(int, int);
 };
+
