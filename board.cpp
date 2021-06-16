@@ -6,6 +6,12 @@ boardClass::boardClass(int row, int column){
   createBoard();
 }
 
+boardClass::boardClass(int row, int column, string file){
+  xDim = column;
+  yDim = row;
+  createBoard(file);
+}
+
 void boardClass::printBoard(){
   for(int x = 0; x<theBoard.size(); x++){
     for(int y = 0; y <theBoard[x].size(); y++){
@@ -13,6 +19,7 @@ void boardClass::printBoard(){
     }
     cout<<endl;
   }
+  cout<<endl;
 }
 
 //xDim = # columns
@@ -25,6 +32,20 @@ void boardClass::createBoard(){
     }
     theBoard.push_back(temp);
     temp.clear();
+  }
+}
+
+void boardClass::createBoard(string file){
+  cout<<"A new file has been created from a file!"<<endl;
+  vector<int> temp;
+  for(int i = 0; i<file.length(); i++){
+    if(file[i]=='|'){
+      theBoard.push_back(temp);
+      temp.clear();
+    }
+    else{
+      temp.push_back(int(file[i] - '0'));
+    }
   }
 }
 

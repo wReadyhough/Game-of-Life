@@ -10,9 +10,11 @@ class boardClass{
   vector<vector<int>> theBoard;
   public:
     boardClass(int, int);
+    boardClass(int, int, string);
     void printBoard();
     void addAliveCells(int);
     void createBoard();
+    void createBoard(string);
     void update();
     bool aliveCheck(int, int);
     bool stillDeadCheck(int, int);
