@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <chrono>
+#include <unistd.h>
 
 #include "board.h"
 
@@ -21,17 +22,20 @@ int main() {
     while(getline(myFile, line)){
       fileVar+=line;
       fileVar+='|';
-      row = line.length();
-      column++;
+      column = line.length();
+      row++;
     }
     boardClass myBoard(row, column, fileVar);
     myBoard.printBoard();
-    myBoard.update();
-    myBoard.printBoard();
-    myBoard.update();
-    myBoard.printBoard();
-    myBoard.update();
-    myBoard.printBoard();
+   while(myBoard.getNumAlive() > 0){
+      usleep(1000000);
+      //cin.get();
+      myBoard.update();
+      myBoard.printBoard();
+      
+
+    }
+    
   }
   else{
     
@@ -62,5 +66,4 @@ int main() {
   }
   myFile.close();
 }
-
 
