@@ -31,7 +31,7 @@ int main() {
   }
   auto stop = high_resolution_clock::now();
   auto duration = duration_cast<microseconds>(stop - start);
-  cout<<"Average program time: "<<(duration.count())/numIterations<<" microseconds"<<endl;
+  cout<<"Average program time: "<<(duration.count())/numIterations<<" microseconds."<<endl;
   
 }
 
