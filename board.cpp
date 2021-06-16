@@ -72,17 +72,16 @@ void boardClass::update(){
 //Becomes alive if it has 3 neighbors
 bool boardClass::aliveCheck(int row, int col){
   int numNeighbors = 0;
-  int myX, myY;
+
   int temp1, temp2;
   for(int i = 0; i < theBoard[row][col].getCols().size(); i++){
     temp1 = theBoard[row][col].getRows()[i];
     temp2 = theBoard[row][col].getCols()[i];
     (theBoard[temp1][temp2].getAD())? numNeighbors++ : numNeighbors+=0;
   }
-  myX = theBoard[row][col].getXDim();
-  myY = theBoard[row][col].getYDim();
+
   //Currently alive, return whether or not it still is
-  if(theBoard[myY][myX].getAD()){
+  if(theBoard[row][col].getAD()){
     return ((numNeighbors==2)||(numNeighbors==3))? 1 : 0;
   }
 
