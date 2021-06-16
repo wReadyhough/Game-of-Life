@@ -6,13 +6,26 @@ boardClass::boardClass(int row, int column){
   createBoard();
 }
 
+boardClass::boardClass(int row, int column, string file){
+  xDim = column;
+  yDim = row;
+  createBoard(file);
+}
+
+int boardClass::getNumAlive(){
+  return numAlive;
+}
+
 void boardClass::printBoard(){
+  system("clear");
   for(int x = 0; x<theBoard.size(); x++){
     for(int y = 0; y <theBoard[x].size(); y++){
-      cout<<theBoard[x][y];
+      cout<<((theBoard[x][y])? ("1") :("-"));
+      //cout<<theBoard[x][y];
     }
     cout<<endl;
   }
+  cout<<endl;
 }
 
 //xDim = # columns
@@ -25,6 +38,23 @@ void boardClass::createBoard(){
     }
     theBoard.push_back(temp);
     temp.clear();
+  }
+}
+
+void boardClass::createBoard(string file){
+  cout<<"A new file has been created from a file!"<<endl;
+  vector<int> temp;
+  for(int i = 0; i<file.length(); i++){
+    if(file[i]=='|'){
+      theBoard.push_back(temp);
+      temp.clear();
+    }
+    else{
+      temp.push_back(int(file[i] - '0'));
+      if(file[i]=='1'){
+        numAlive++;
+      }
+    }
   }
 }
 
@@ -74,10 +104,10 @@ bool boardClass::aliveCheck(int row, int col){
   for(int x = -1; x < 2; x++){
     for(int y = -1; y <2; y++){
       //staying in bounds.
-      if((row+x)<0 || (row+x)>4){
+      if((row+x)<0 || (row+x)>=yDim){
         continue;
       }
-      if((col+y)<0||(col+y)>5){
+      if((col+y)<0||(col+y)>xDim){
         continue;
       }
 
@@ -85,22 +115,29 @@ bool boardClass::aliveCheck(int row, int col){
       if(y ==0 && x == 0){
         continue;
       }
-
-
       //This neighbor is alive, increment # of neighbors
       //Otherwise, add 0 to numNeighbors
+
       (theBoard[row+x][col+y])? numNeighbors++ : numNeighbors+=0;
     }
   }
-
-
+  //cout<<"cell at row "<<row<<" col "<<col<<" has "<<numNeighbors<<" alive neighbors"<<endl;
   //Currently alive, return whether or not it still is
+  //cout<<"Cell at row "<<row<<" col "<<col<<" has "<<numNeighbors<<" alive neighbors."<<endl;
   if(theBoard[row][col]){
 
+    //dies.
+    if((numNeighbors!=2)&&numNeighbors != 3){
+      numAlive--;
+    }    
     return ((numNeighbors==2)||(numNeighbors==3))? 1 : 0;
   }
 
   //Currently dead, return whether or not it still is
+  //Becomes alive
+  if(numNeighbors == 3){
+    numAlive++;
+  }
   return(numNeighbors==3)? 1 : 0;
 }
 
