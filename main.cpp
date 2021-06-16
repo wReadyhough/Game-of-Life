@@ -11,17 +11,17 @@ int main() {
   int numIterations = 100;
   auto start = high_resolution_clock::now();
   srand(time(NULL));
+  int numAlive, row, column;
+  cout<<"Enter number of rows/columns: ";
+  cin>>row;
+  column = row;
+  cout<<"Enter number of alive cells("<<row*row<<" total spaces): ";
+  cin>>numAlive;
   for(int i = 0; i < numIterations; i++){
-    
-
-    int numAlive, row, column;
-    row = 10;
-    column = 10;
     boardClass myBoard(row,column);
     myBoard.printBoard();
     /*cout<<"How many cells do you want alive: ";
     cin>>numAlive;*/
-    numAlive = 10;
     myBoard.addAliveCells(numAlive);
     cout<<"Board after randomly inserting "<<numAlive<<" alive cells: "<<endl;
     myBoard.printBoard();
